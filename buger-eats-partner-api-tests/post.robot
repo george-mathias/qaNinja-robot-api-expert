@@ -2,10 +2,12 @@
 Documentation    POST /partners
 
 Library          RequestsLibrary
+Library          RobotMongoDBLibrary.Delete
 
 *** Variables ***
 ${BASE_URL}      http://localhost:3333
 ${ENDPOINT}      /partners
+&{MONGO_URI}     connection=mongodb+srv://bugereats:bugerEats@cluster0.zhrbt.mongodb.net/PartnerDB?retryWrites=true&w=majority    database=PartnerDB   collection=partner
 
 *** Test Cases ***
 Should create a new partner
@@ -20,6 +22,11 @@ Should create a new partner
     ...           Content-Type=application/json
     ...           auth_user=qa
     ...           auth_password=ninja
+
+    ${filter}     Create Dictionary
+    ...           name=Pizzas Papito's
+
+    Delete One    ${MONGO_URI}    ${filter}
 
     ${response}   POST    ${BASE_URL}${ENDPOINT}
     ...           json=${payload}

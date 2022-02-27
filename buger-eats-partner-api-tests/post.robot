@@ -3,6 +3,7 @@ Documentation    POST /partners
 
 Library          RequestsLibrary
 Library          RobotMongoDBLibrary.Delete
+Library          RobotMongoDBLibrary.Find
 
 *** Variables ***
 ${BASE_URL}      http://localhost:3333
@@ -33,3 +34,7 @@ Should create a new partner
     ...           headers=${headers}
 
     Status Should Be    201
+    
+    ${results}    Find    ${MONGO_URI}    ${filter}
+    
+    Should Be Equal    ${response.json()}[partner_id]    ${results}[0][_id]

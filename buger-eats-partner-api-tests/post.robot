@@ -34,7 +34,12 @@ Should create a new partner
     ...           headers=${headers}
 
     Status Should Be    201
+
+    Log To Console   Response: ${response}
+    Log To Console   ResponseBody: ${response.json()}
+    Log To Console   ResponseBody: ${response.json()}[partner_id]
     
     ${results}    Find    ${MONGO_URI}    ${filter}
+    Log To Console     Results: ${results}[0]
     
     Should Be Equal    ${response.json()}[partner_id]    ${results}[0][_id]

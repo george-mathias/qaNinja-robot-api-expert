@@ -1,14 +1,7 @@
 *** Settings ***
 Documentation    POST /partners
 
-Library          RequestsLibrary
-Library          RobotMongoDBLibrary.Delete
-Library          RobotMongoDBLibrary.Find
-
-*** Variables ***
-${BASE_URL}      http://localhost:3333
-${ENDPOINT}      /partners
-&{MONGO_URI}     connection=mongodb+srv://bugereats:bugerEats@cluster0.zhrbt.mongodb.net/PartnerDB?retryWrites=true&w=majority    database=PartnerDB   collection=partner
+Resource         ${EXECDIR}/resources/base.robot
 
 *** Test Cases ***
 Should create a new partner
@@ -29,7 +22,7 @@ Should create a new partner
 
     Delete One    ${MONGO_URI}    ${filter}
 
-    ${response}   POST    ${BASE_URL}${ENDPOINT}
+    ${response}   POST    ${BASE_URL}${/PARTNERS}
     ...           json=${payload}
     ...           headers=${headers}
 

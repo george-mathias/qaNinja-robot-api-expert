@@ -2,6 +2,7 @@
 Documentation    POST /partners
 
 Resource         ${EXECDIR}/resources/base.robot
+Resource    ../resources/services.robot
 
 *** Test Cases ***
 Should create a new partner
@@ -12,27 +13,17 @@ Should create a new partner
     ...           whatsapp=11999999999
     ...           business=Restaurante
 
-    ${headers}    Create Dictionary
-    ...           Content-Type=application/json
-    ...           auth_user=qa
-    ...           auth_password=ninja
+    Remove Partner By Name    Pizzas Papito's
 
-    ${filter}     Create Dictionary
-    ...           name=Pizzas Papito's
-
-    Delete One    ${MONGO_URI}    ${filter}
-
-    ${response}   POST    ${BASE_URL}${/PARTNERS}
-    ...           json=${payload}
-    ...           headers=${headers}
+    ${response}    POST Partner    ${payload}
 
     Status Should Be    201
 
     Log To Console   Response: ${response}
     Log To Console   ResponseBody: ${response.json()}
-    Log To Console   ResponseBody: ${response.json()}[partner_id]
+    Log To Console   ResponseBodyPartner: ${response.json()}[partner_id]
     
-    ${results}    Find    ${MONGO_URI}    ${filter}
-    Log To Console     Results: ${results}[0]
+    ${result}      Find Partner by Name     Pizzas Papito's
+    Log To Console     Results: ${result}
     
-    Should Be Equal    ${response.json()}[partner_id]    ${results}[0][_id]
+    Should Be Equal    ${response.json()}[partner_id]    ${result}[_id]

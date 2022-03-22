@@ -18,7 +18,7 @@ Should create a new partner
     Log To Console   ResponseBody: ${response.json()}
     Log To Console   ResponseBodyPartner: ${response.json()}[partner_id]
     
-    ${result}      Find Partner by Name     Pizzas Papito's
+    ${result}      Find Partner by Name     ${partner}[name]
     Log To Console     Results: ${result}
     
     Should Be Equal    ${response.json()}[partner_id]    ${result}[_id]

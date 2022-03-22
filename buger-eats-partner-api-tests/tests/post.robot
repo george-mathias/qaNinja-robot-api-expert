@@ -2,20 +2,15 @@
 Documentation    POST /partners
 
 Resource         ${EXECDIR}/resources/base.robot
-Resource    ../resources/services.robot
 
 *** Test Cases ***
 Should create a new partner
     
-    ${payload}    Create Dictionary
-    ...           name=Pizzas Papito's
-    ...           email=contato@papitos.com.br
-    ...           whatsapp=11999999999
-    ...           business=Restaurante
+    ${partner}    Factory New Partner
 
-    Remove Partner By Name    Pizzas Papito's
+    Remove Partner By Name    ${partner}[name]
 
-    ${response}    POST Partner    ${payload}
+    ${response}    POST Partner    ${partner}
 
     Status Should Be    201
 

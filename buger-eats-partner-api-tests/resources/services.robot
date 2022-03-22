@@ -10,10 +10,11 @@ ${/PARTNERS}      /partners
 
 *** Keywords ***
 POST Partner
-    [Arguments]    ${payload}
+    [Arguments]   ${payload}
 
     ${response}   POST    ${BASE_URL}${/PARTNERS}
     ...           json=${payload}
     ...           headers=${HEADERS}
+    ...           expected_status=any
 
     [return]      ${response}

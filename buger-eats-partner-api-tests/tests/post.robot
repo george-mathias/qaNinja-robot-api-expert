@@ -14,11 +14,25 @@ Should create a new partner
 
     Status Should Be    201
 
-    Log To Console   Response: ${response}
-    Log To Console   ResponseBody: ${response.json()}
-    Log To Console   ResponseBodyPartner: ${response.json()}[partner_id]
+    Log To Console   \nResponse: ${response}
+    Log To Console   \nResponseBody: ${response.json()}
+    Log To Console   \nResponseBodyPartner: ${response.json()}[partner_id]
     
     ${result}      Find Partner by Name     ${partner}[name]
     Log To Console     Results: ${result}
     
     Should Be Equal    ${response.json()}[partner_id]    ${result}[_id]
+
+Should return duplicate company name
+    [Tags]    bugs
+    ${partner}    Factory Duplicate Name
+
+    Remove Partner By Name    ${partner}[name]
+    POST Partner    ${partner}
+
+    ${response}    POST Partner    ${partner}
+    Status Should Be    409
+
+    Log To Console    \nResponse: ${response.json()}
+
+    Should Be Equal    ${response.json()}[message]    Duplicate company name

@@ -6,3 +6,12 @@ def factory_new_partner():
         'business': 'Restaurante'
     }
     return partner
+
+def factory_duplicate_name():
+    partner = {
+        'name': "Pizza do João",
+        'email': 'qualqeur@joao.com.br',
+        'whatsapp': '61899999999',
+        'business': 'Conveniência'
+    }
+    return partner

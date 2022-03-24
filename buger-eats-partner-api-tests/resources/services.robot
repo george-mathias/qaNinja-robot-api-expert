@@ -25,3 +25,14 @@ GET Partners
     ...           expected_status=any
 
     [return]      ${response}
+Search partner
+    [Arguments]    ${name}
+
+    ${query}    Create Dictionary    name=${name}
+
+    ${response}   GET    ${BASE_URL}${/PARTNERS}
+    ...           params=${query}
+    ...           headers=${HEADERS}
+    ...           expected_status=any
+
+    [return]      ${response}

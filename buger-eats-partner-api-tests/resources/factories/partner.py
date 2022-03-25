@@ -48,6 +48,15 @@ def factory_enable_partner():
     }
     return partner
 
+def factory_disable_partner():
+    partner = {
+        'name': "Mercado Noite",
+        'email': 'contato@mercadonoite.com',
+        'whatsapp': '11899999999',
+        'business': 'Supermercado'
+    }
+    return partner
+
 def factory_404_partner():
     partner = {
         'name': "Frangão",

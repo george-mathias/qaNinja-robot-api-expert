@@ -57,6 +57,15 @@ def factory_disable_partner():
     }
     return partner
 
+def factory_remove_partner():
+    partner = {
+        'name': "Adega do Papito",
+        'email': 'contato@adp.com.br',
+        'whatsapp': '11899999999',
+        'business': 'Restaurante'
+    }
+    return partner
+
 def factory_404_partner():
     partner = {
         'name': "Frangão",

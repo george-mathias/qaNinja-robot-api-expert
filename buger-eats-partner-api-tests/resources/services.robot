@@ -54,3 +54,12 @@ Disable Partner
     ...           expected_status=any
 
     [return]      ${response}
+
+DELETE Partner
+    [Arguments]   ${partner_id}
+
+    ${response}   DELETE    ${BASE_URL}${/PARTNERS}/${partner_id}
+    ...           headers=${HEADERS}
+    ...           expected_status=any
+
+    [return]      ${response}

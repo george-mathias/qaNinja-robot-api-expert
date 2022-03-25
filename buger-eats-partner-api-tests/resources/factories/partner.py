@@ -38,3 +38,21 @@ def factory_partner_list():
         }    
     ]
     return p_list
+
+def factory_enable_partner():
+    partner = {
+        'name': "Doceria do Papito",
+        'email': 'doceria@yahoo.com',
+        'whatsapp': '11899999999',
+        'business': 'Conveniência'
+    }
+    return partner
+
+def factory_404_partner():
+    partner = {
+        'name': "Frangão",
+        'email': 'contato@frangao.com',
+        'whatsapp': '11899999999',
+        'business': 'Restaurante'
+    }
+    return partner

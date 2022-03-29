@@ -32,6 +32,5 @@ Get Message
     ${response}       POST    ${RABBIT_URL}/get
     ...               json=${payload}
     ...               headers=&{RABBIT_HEADERS}
-    ...               Authorization=${RABBIT_TOKEN}
 
-    [Return]          ${response}
+    [Return]          ${response.json()}[0]

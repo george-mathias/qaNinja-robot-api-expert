@@ -5,6 +5,9 @@ Resource         ${EXECDIR}/resources/base.robot
 
 *** Test Cases ***
 Should create a new partner
+    [Tags]    happy
+
+    Purge Messages
     
     ${partner}    Factory New Partner
 
@@ -18,10 +21,15 @@ Should create a new partner
     Log To Console   \nResponseBody: ${response.json()}
     Log To Console   \nResponseBodyPartner: ${response.json()}[partner_id]
     
-    ${result}      Find Partner by Name     ${partner}[name]
+    ${result}          Find Partner by Name     ${partner}[name]
     Log To Console     Results: ${result}
     
     Should Be Equal    ${response.json()}[partner_id]    ${result}[_id]
+
+    ${message}         Get Message
+    Log                ${message}[payload]
+
+    Should Contain     ${message}[payload]    ${partner}[email]
 
 Should return duplicate company name
     [Tags]    bugs
